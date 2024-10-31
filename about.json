@@ -9,7 +9,14 @@
   "minimum_discourse_version": null,
   "maximum_discourse_version": null,
   "assets": {
+    "icons-sprite": "/assets/icons-sprite.svg"
   },
   "modifiers": {
+    "serialize_topic_excerpts": true,
+    "topic_thumbnail_sizes": [
+      [400, 400],
+      [600, 600],
+      [800, 800]
+    ]
   }
 }
