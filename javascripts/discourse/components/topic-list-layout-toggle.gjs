@@ -50,7 +50,7 @@ export default class TopicListLayoutToggle extends Component {
 
     document
       .querySelector(".topic-list")
-      .setAttribute("data-layout", this.selectedOptionId);
+      ?.setAttribute("data-layout", this.selectedOptionId);
   }
 
   handleRouteChange() {
@@ -123,7 +123,9 @@ export default class TopicListLayoutToggle extends Component {
   @action
   onSelect(optionId) {
     this.selectedOptionId = optionId;
-    document.querySelector(".topic-list").setAttribute("data-layout", optionId);
+    document
+      .querySelector(".topic-list")
+      ?.setAttribute("data-layout", optionId);
     this.topicListPreference.setPreference(optionId);
     this.dMenu.close();
   }
