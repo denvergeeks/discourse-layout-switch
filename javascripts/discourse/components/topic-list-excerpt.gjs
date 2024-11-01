@@ -32,12 +32,18 @@ export default class TopicListExcerpt extends Component {
     const topic = this.args.topic;
     const gist = topic?.ai_topic_gist;
     const excerpt = topic?.excerpt;
+    const preference = this.topicListPreference.preference;
 
-    if (gist) {
-      return gist;
+    switch (preference) {
+      case "table-excerpts":
+        return excerpt;
+      case "table-ai":
+        return gist;
+      case "cards":
+        return gist || (excerpt?.length ? excerpt : null);
+      default:
+        return null;
     }
-
-    return excerpt?.length ? excerpt : null;
   }
 
   <template>

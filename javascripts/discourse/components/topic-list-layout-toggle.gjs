@@ -19,6 +19,44 @@ export default class TopicListLayoutToggle extends Component {
   @tracked
   selectedOptionId = this.topicListPreference.preference || this.buttons[0].id;
 
+  constructor() {
+    super(...arguments);
+    this.router.on("routeDidChange", this.handleRouteChange.bind(this));
+  }
+
+  updatePreference() {
+    let preference = this.topicListPreference.preference;
+    const gistsAvailable =
+      this.router.currentRoute.attributes?.list?.topics?.some(
+        (topic) => topic.ai_topic_gist
+      );
+
+    const aiPreferred = localStorage.getItem("aiPreferred");
+
+    // if gists aren't available, switch to excerpts
+    // but remember gists are preferred so we can switch back
+    if (preference === "table-ai" && !gistsAvailable) {
+      preference = "table-excerpts";
+      this.topicListPreference.setPreference(preference);
+    } else if (aiPreferred && gistsAvailable) {
+      preference = "table-ai";
+      this.topicListPreference.setPreference(preference);
+      localStorage.removeItem("aiPreferred");
+    } else {
+      localStorage.removeItem("aiPreferred");
+    }
+
+    this.selectedOptionId = preference || this.buttons[0].id;
+
+    document
+      .querySelector(".topic-list")
+      .setAttribute("data-layout", this.selectedOptionId);
+  }
+
+  handleRouteChange() {
+    this.updatePreference();
+  }
+
   get shouldShow() {
     const currentRoute = this.router.currentRoute.name;
     const isDiscovery = currentRoute.includes("discovery");
@@ -45,15 +83,15 @@ export default class TopicListLayoutToggle extends Component {
       buttons.push({
         id: "table-ai",
         label: "toggle_labels.table_gists",
-        icon: "discourse-sparkles",
-      });
-    } else {
-      buttons.push({
-        id: "table-excerpts",
-        label: "toggle_labels.table_excerpts",
-        icon: "discourse-table",
+        icon: "discourse-table-sparkles",
       });
     }
+
+    buttons.push({
+      id: "table-excerpts",
+      label: "toggle_labels.table_excerpts",
+      icon: "discourse-table-excerpt",
+    });
 
     buttons.push({
       id: "cards",
@@ -69,10 +107,6 @@ export default class TopicListLayoutToggle extends Component {
 
     let match = this.buttons.find((button) => button.id === selectedOptionId);
 
-    if (!match && selectedOptionId.startsWith("table-")) {
-      match = this.buttons.find((button) => button.id === "table");
-    }
-
     return match;
   }
 
@@ -83,12 +117,7 @@ export default class TopicListLayoutToggle extends Component {
 
   @action
   initialPreference() {
-    const preference = this.topicListPreference.preference;
-    this.selectedOptionId = preference || this.buttons[0].id;
-
-    document
-      .querySelector(".topic-list")
-      .setAttribute("data-layout", preference);
+    this.updatePreference();
   }
 
   @action

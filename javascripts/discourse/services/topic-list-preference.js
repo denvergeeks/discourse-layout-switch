@@ -7,5 +7,9 @@ export default class TopicListPreference extends Service {
   setPreference(value) {
     this.preference = value;
     localStorage.setItem("topicListLayout", value);
+
+    if (this.preference === "table-ai") {
+      localStorage.setItem("aiPreferred", true);
+    }
   }
 }
