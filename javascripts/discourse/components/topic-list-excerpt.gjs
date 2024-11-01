@@ -50,7 +50,7 @@ export default class TopicListExcerpt extends Component {
     {{#if this.shouldShow}}
       {{#if this.excerpt}}
         <div class="excerpt">
-          {{this.excerpt}}
+          <div>{{this.excerpt}}</div>
         </div>
       {{/if}}
     {{/if}}

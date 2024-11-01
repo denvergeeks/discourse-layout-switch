@@ -197,5 +197,8 @@ body.topic-list-layout-cards {
   .excerpt {
     width: 100%;
     font-size: var(--font-down-1);
+    div {
+      max-width: 75ch;
+    }
   }
 }
