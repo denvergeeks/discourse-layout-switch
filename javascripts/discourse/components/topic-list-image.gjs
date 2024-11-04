@@ -4,12 +4,17 @@ import { service } from "@ember/service";
 export default class TopicListImage extends Component {
   @service topicListPreference;
   @service router;
+  @service site;
 
   get shouldShow() {
     const currentRoute = this.router.currentRoute.name;
     const isDiscovery = currentRoute.includes("discovery");
 
-    return this.topicListPreference.preference === "cards" && isDiscovery;
+    return (
+      this.topicListPreference.preference === "cards" &&
+      isDiscovery &&
+      !this.site.mobileView
+    );
   }
 
   <template>

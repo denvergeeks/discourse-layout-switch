@@ -15,6 +15,7 @@ export default class TopicListLayoutToggle extends Component {
   @service router;
   @service topicListPreference;
   @service siteSettings;
+  @service site;
 
   @tracked
   selectedOptionId = this.topicListPreference.preference || this.buttons[0].id;
@@ -62,7 +63,7 @@ export default class TopicListLayoutToggle extends Component {
     const isDiscovery = currentRoute.includes("discovery");
     const isNotCategories = !currentRoute.includes("categories");
 
-    return isDiscovery && isNotCategories;
+    return isDiscovery && isNotCategories && !this.site.mobileView;
   }
 
   get buttons() {

@@ -4,12 +4,17 @@ import { service } from "@ember/service";
 export default class TopicListExcerpt extends Component {
   @service topicListPreference;
   @service router;
+  @service site;
 
   get shouldShow() {
     const currentRoute = this.router.currentRoute.name;
     const isDiscovery = currentRoute.includes("discovery");
     const outlet = this.args.outlet;
     const preference = this.topicListPreference.preference;
+
+    if (this.site.mobileView) {
+      return false;
+    }
 
     if (isDiscovery) {
       if (
