@@ -16,6 +16,7 @@ export default class TopicListLayoutToggle extends Component {
   @service topicListPreference;
   @service siteSettings;
   @service site;
+  @service topicThumbnails; // from Topic Thumbnails theme component
 
   @tracked
   selectedOptionId = this.topicListPreference.preference || this.buttons[0].id;
@@ -62,8 +63,14 @@ export default class TopicListLayoutToggle extends Component {
     const currentRoute = this.router.currentRoute.name;
     const isDiscovery = currentRoute.includes("discovery");
     const isNotCategories = !currentRoute.includes("categories");
+    const isNotTopicThumbnails = !this.topicThumbnails?.enabledForRoute;
 
-    return isDiscovery && isNotCategories && !this.site.mobileView;
+    return (
+      isDiscovery &&
+      isNotCategories &&
+      !this.site.mobileView &&
+      isNotTopicThumbnails
+    );
   }
 
   get buttons() {

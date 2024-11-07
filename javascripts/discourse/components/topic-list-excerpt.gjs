@@ -5,18 +5,20 @@ export default class TopicListExcerpt extends Component {
   @service topicListPreference;
   @service router;
   @service site;
+  @service topicThumbnails; // from Topic Thumbnails theme component
 
   get shouldShow() {
     const currentRoute = this.router.currentRoute.name;
     const isDiscovery = currentRoute.includes("discovery");
     const outlet = this.args.outlet;
     const preference = this.topicListPreference.preference;
+    const isNotTopicThumbnails = !this.topicThumbnails?.enabledForRoute;
 
     if (this.site.mobileView) {
       return false;
     }
 
-    if (isDiscovery) {
+    if (isDiscovery && isNotTopicThumbnails) {
       if (
         preference.includes("table-") &&
         outlet === "topic-list-before-category"

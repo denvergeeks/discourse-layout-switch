@@ -5,15 +5,18 @@ export default class TopicListImage extends Component {
   @service topicListPreference;
   @service router;
   @service site;
+  @service topicThumbnails; // from Topic Thumbnails theme component
 
   get shouldShow() {
     const currentRoute = this.router.currentRoute.name;
     const isDiscovery = currentRoute.includes("discovery");
+    const isNotTopicThumbnails = !this.topicThumbnails?.enabledForRoute;
 
     return (
       this.topicListPreference.preference === "cards" &&
       isDiscovery &&
-      !this.site.mobileView
+      !this.site.mobileView &&
+      isNotTopicThumbnails
     );
   }
 
