@@ -4,10 +4,15 @@ import icon from "discourse-common/helpers/d-icon";
 
 export default class TopicListReplyCountIcon extends Component {
   @service site;
+  @service topicListPreference;
   @service topicThumbnails; // from Topic Thumbnails theme component
 
   get shouldShow() {
-    return !this.site.mobileView && !this.topicThumbnails?.shouldDisplay;
+    const isCard = this.topicListPreference.preference === "cards";
+
+    return (
+      !this.site.mobileView && !this.topicThumbnails?.shouldDisplay && isCard
+    );
   }
 
   <template>
