@@ -195,11 +195,26 @@ body[class*="topic-list-layout-"] {
   }
 
   .topic-list[data-layout*="table-"] {
-    .excerpt {
-      width: 100%;
-      font-size: var(--font-down-1);
-      div {
-        max-width: 75ch;
+    .topic-list-item {
+      .main-link {
+        padding: 1em 1em 1em 0.67em;
+        font-size: var(--font-up-2);
+        line-height: var(--line-height-medium);
+      }
+      .link-bottom-line {
+        font-size: var(--font-down-2);
+        margin-top: 0.25em;
+      }
+      .excerpt {
+        width: 100%;
+        font-size: var(--font-0);
+        line-height: var(--line-height-large);
+        margin-top: 0.25em;
+        margin-bottom: 0.15em;
+        max-width: 70ch;
+      }
+      .topic-post-badges {
+        font-size: var(--font-down-1);
       }
     }
     .topic-excerpt {
