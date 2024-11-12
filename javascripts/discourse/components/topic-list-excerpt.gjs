@@ -1,5 +1,6 @@
 import Component from "@glimmer/component";
 import { service } from "@ember/service";
+import { htmlSafe } from "@ember/template";
 
 export default class TopicListExcerpt extends Component {
   @service topicListPreference;
@@ -57,7 +58,7 @@ export default class TopicListExcerpt extends Component {
     {{#if this.shouldShow}}
       {{#if this.excerpt}}
         <div class="excerpt">
-          <div>{{this.excerpt}}</div>
+          <div>{{htmlSafe this.excerpt}}</div>
         </div>
       {{/if}}
     {{/if}}
