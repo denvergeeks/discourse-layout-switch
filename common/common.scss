@@ -255,6 +255,7 @@ body[class*="topic-list-layout-"] {
     .right {
       margin: 0;
       display: grid;
+      position: relative;
 
       grid-template-areas:
         "meta date"
@@ -286,6 +287,7 @@ body[class*="topic-list-layout-"] {
       .main-link {
         grid-area: title;
         width: 100%;
+        position: static;
 
         font-size: var(--font-up-1);
         display: grid;
@@ -294,6 +296,12 @@ body[class*="topic-list-layout-"] {
 
         .topic-statuses {
           grid-area: status;
+        }
+
+        .topic-post-badges {
+          position: absolute;
+          right: 0;
+          bottom: 0;
         }
 
         .title {
