@@ -5,7 +5,6 @@ import { htmlSafe } from "@ember/template";
 export default class TopicListExcerpt extends Component {
   @service topicListPreference;
   @service router;
-  @service site;
   @service topicThumbnails; // from Topic Thumbnails theme component
 
   get shouldShow() {
@@ -14,10 +13,6 @@ export default class TopicListExcerpt extends Component {
     const outlet = this.args.outlet;
     const preference = this.topicListPreference.preference;
     const isNotTopicThumbnails = !this.topicThumbnails?.enabledForRoute;
-
-    if (this.site.mobileView) {
-      return false;
-    }
 
     if (isDiscovery && isNotTopicThumbnails) {
       if (

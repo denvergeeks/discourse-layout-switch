@@ -4,7 +4,6 @@ import { service } from "@ember/service";
 export default class TopicListImage extends Component {
   @service topicListPreference;
   @service router;
-  @service site;
   @service topicThumbnails; // from Topic Thumbnails theme component
 
   get shouldShow() {
@@ -15,7 +14,6 @@ export default class TopicListImage extends Component {
     return (
       this.topicListPreference.preference === "cards" &&
       isDiscovery &&
-      !this.site.mobileView &&
       isNotTopicThumbnails
     );
   }

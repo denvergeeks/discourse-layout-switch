@@ -14,8 +14,6 @@ import DMenu from "float-kit/components/d-menu";
 export default class TopicListLayoutToggle extends Component {
   @service router;
   @service topicListPreference;
-  @service siteSettings;
-  @service site;
   @service topicThumbnails; // from Topic Thumbnails theme component
 
   @tracked
@@ -65,12 +63,7 @@ export default class TopicListLayoutToggle extends Component {
     const isNotCategories = !currentRoute.includes("categories");
     const isNotTopicThumbnails = !this.topicThumbnails?.enabledForRoute;
 
-    return (
-      isDiscovery &&
-      isNotCategories &&
-      !this.site.mobileView &&
-      isNotTopicThumbnails
-    );
+    return isDiscovery && isNotCategories && isNotTopicThumbnails;
   }
 
   get buttons() {
