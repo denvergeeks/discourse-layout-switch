@@ -1,6 +1,7 @@
 import Component from "@glimmer/component";
 import { service } from "@ember/service";
 import { htmlSafe } from "@ember/template";
+import { emojiUnescape, sanitize } from "discourse/lib/text";
 
 export default class TopicListExcerpt extends Component {
   @service topicListPreference;
@@ -34,7 +35,7 @@ export default class TopicListExcerpt extends Component {
   get excerpt() {
     const topic = this.args.topic;
     const gist = topic?.ai_topic_gist;
-    const excerpt = topic?.excerpt;
+    const excerpt = emojiUnescape(sanitize(topic?.excerpt));
     const preference = this.topicListPreference.preference;
 
     switch (preference) {
