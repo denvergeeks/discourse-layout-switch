@@ -1,6 +1,6 @@
 import Component from "@glimmer/component";
 import { service } from "@ember/service";
-// import PostersColumn from "discourse/components/topic-list/posters-column";
+import PostersColumn from "discourse/components/topic-list/posters-column";
 import icon from "discourse-common/helpers/d-icon";
 
 export default class TopicListReplyCountIcon extends Component {
