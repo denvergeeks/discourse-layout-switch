@@ -18,7 +18,7 @@ export default class TopicListReplyCountIcon extends Component {
     {{#if this.shouldShow}}
       {{#if this.site.mobileView}}
         {{#if @outletArgs.topic.featuredUsers}}
-          <posterscolumn @posters={{@outletArgs.topic.featuredUsers}} />
+          <PostersColumn @posters={{@outletArgs.topic.featuredUsers}} />
         {{/if}}
       {{/if}}
       {{icon "far-comment"}}
